@@ -7,11 +7,13 @@ require("dotenv").config();
 
 const PORT = 4000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
+console.log(CONNECTION_URL);
 
 const app = express();
 app.use(
   cors({
     credentials: true,
+    // origin: "http://localhost:3000",
   })
 );
 
