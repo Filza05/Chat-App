@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import axios from '../Util/Axios'
 import { useForm } from "react-hook-form"
 import SignUpPic from '../Assets/SignUpPic.jpg'
 
@@ -19,7 +19,7 @@ function SignUp() {
       password: data.password
     }
     axios
-      .post('http://localhost:4000/sign-up', user)
+      .post('/sign-up', user)
       .then(res => {
         console.log("User Successfully Registered!!!", res)
       })
