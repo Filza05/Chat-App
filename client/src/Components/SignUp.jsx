@@ -1,11 +1,10 @@
 import React from 'react'
 import axios from '../Util/Axios'
+import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import SignUpPic from '../Assets/SignUpPic.jpg'
 
-
 function SignUp() {
-
   const { register, formState: { errors, isDirty, isValid }, handleSubmit } = useForm({
     mode: "onChange",
   });
@@ -82,16 +81,16 @@ function SignUp() {
 
           <div className='mt-4 flex items-center gap-4'>
             <button type='submit' disabled={!isDirty || !isValid}
-              className='rounded-lg bg-[#F2DCBB] w-1/2 h-12 text-center text-sm font-bold
-               text-[#555555] sm:text-xl hover:border-b-2 hover:duration-700'>
+              className={`rounded-lg bg-[#F2DCBB] w-1/2 h-12 text-center text-sm font-bold
+               text-[#555555] sm:text-xl hover:border-b-2 border-[#555555] cursor-${!isDirty || !isValid ? 'not-allowed' : 'pointer'}`}>
               Sign-Up
             </button>
             <p className='text-xl font-bolder text-[#555555]'>
               OR
             </p>
             <button className='rounded-lg bg-[#F2DCBB] w-1/2 h-12 text-center text-sm font-bold
-             text-[#555555] sm:text-xl hover:border-b-2 hover:duration-700'>
-              Log-In
+             text-[#555555] sm:text-xl hover:border-b-2 border-[#555555]'>
+              <Link to="/Login">Log-In</Link>
             </button>
           </div>
         </form>
