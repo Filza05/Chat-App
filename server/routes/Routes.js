@@ -20,7 +20,7 @@ Router.post("/request-sign-up", async (req, res) => {
       .status(201)
       .json({ message: "verification code sent succesfully" });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: "internal server error" });
   }
 });
 
@@ -33,20 +33,20 @@ Router.post("/verify-sign-up/:verificationCode", async (req, res) => {
     verificationCode: verificationCode,
   });
 
-  if (response) {
-    user.password = await bcrypt.hash(user.password, 12);
-    const newUser = new UserModel(user);
+  if (!response)
+    return res
+      .status(409)
+      .json({ message: "verification code did'nt match" });
 
-    try {
-      const userDoc = await newUser.save();
-      console.log("user saved to database");
-      res.status(201).json(userDoc);
-    } catch (error) {
-      res.status(500).json("internal server error");
-    }
-  } else {
-    console.log("verificationCode did not match");
-    res.status(409).json({ message: "verificationCode did not match" });
+  user.password = await bcrypt.hash(user.password, 12);
+  const newUser = new UserModel(user);
+
+  try {
+    const userDoc = await newUser.save();
+    console.log("user saved to database");
+    res.status(201).json(userDoc);
+  } catch (error) {
+    res.status(500).json("internal server error");
   }
 });
 
