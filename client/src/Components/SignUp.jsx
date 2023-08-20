@@ -151,8 +151,7 @@ function SignUp() {
               type="submit"
               disabled={!isDirty || !isValid}
               className={`rounded-lg bg-[#F2DCBB] w-1/2 h-12 text-center text-sm font-bold
-               text-[#555555] sm:text-xl hover:border-b-2 border-[#555555] cursor-${
-                 !isDirty || !isValid ? "not-allowed" : "pointer"
+               text-[#555555] sm:text-xl hover:border-b-2 border-[#555555] cursor-${(!isDirty || !isValid) ? 'not-allowed' : 'pointer'}
                }`}
             >
               Sign-Up
