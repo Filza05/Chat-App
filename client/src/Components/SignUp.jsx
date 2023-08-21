@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import SignUpPic from "../Assets/SignUpPic.jpg";
 import VerifyModal from "./VerifyModal";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -16,14 +17,25 @@ function SignUp() {
   });
 
   const handleVerificationModalSubmit = async (verificationCode) => {
-    const response = await axios.post(
-      `/verify-sign-up/${verificationCode}`,
-      formData
-    );
-
-    if (response.status == 201) {
-      navigate("/Login");
-    }
+    setShowVerifyModal(false);
+    axios
+      .post(`/verify-sign-up/${verificationCode}`, formData)
+      .then((response) => {
+        if (response.status === 201) {
+          return navigate("/Login");
+        }
+      })
+      .catch(({ response }) => {
+        console.log(response);
+        toast.error(response.data.message, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+        });
+      });
   };
 
   const {
@@ -42,13 +54,21 @@ function SignUp() {
     axios
       .post("/request-sign-up", user)
       .then((res) => {
-        if (res.status == 201) {
+        if (res.status === 201) {
           setShowVerifyModal(true);
           setFormData(data);
         }
       })
-      .catch((err) => {
-        console.log("Error Registering User", err);
+      .catch(({ response }) => {
+        console.log(response.data.error);
+        toast.error(response.data.error, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+        });
       });
   };
   return (
