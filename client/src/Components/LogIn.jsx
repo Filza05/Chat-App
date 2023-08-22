@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "../Utils/Axios";
 import { useForm } from "react-hook-form";
 import SignUpPic from "../Assets/SignUpPic.jpg";
 
