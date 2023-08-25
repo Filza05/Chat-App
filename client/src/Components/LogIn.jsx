@@ -16,7 +16,7 @@ function LogIn() {
   });
 
   const inputStyle =
-    "w-full border-b-2 border-[#555555] mb-4 mt-4 p-4 border-l-2 rounded-lg bg-[#F9F7CF] text-xl font-bolder text-[#AAAAAA]";
+    "w-full border-b-4 border-[#393E46] bg-[#F7F7F7] mb-6 mt-8 p-4 border-l-2 rounded-sm text-xl font-bolder text-[#404258]";
 
   const onSubmit = (data) => {
     axiosOBJ
@@ -40,8 +40,8 @@ function LogIn() {
   };
 
   return (
-    <div className="flex bg-[#BBBBBB]">
-      <div className="leftDiv h-screen w-[40%] hidden sm:block">
+    <div className="flex bg-[#404258]">
+      <div className="leftDiv h-screen w-[40%] hidden md:block">
         <img
           alt="chat-pic"
           src={SignUpPic}
@@ -49,10 +49,10 @@ function LogIn() {
         ></img>
       </div>
 
-      <div className="rightDiv bg-[#BBBBBB] h-screen sm:w-[60%] w-[90%] flex items-center m-auto">
+      <div className="rightDiv bg-[#404258] h-screen md:w-[60%] w-[90%] flex items-center m-auto">
         <form
-          className="w-[90%] m-auto h-fit bg-[#AAAAAA] shadow-lg shadow-[#968C83] 
-          rounded-lg p-10 flex-col justify-between"
+          className="w-[90%] lg:w-[65%] m-auto max-h-[fit-content] bg-[#6B728E] shadow-lg shadow-[#50577A] 
+          rounded-sm p-10 flex-col justify-between"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
@@ -99,10 +99,8 @@ function LogIn() {
             <button
               type="submit"
               disabled={!isDirty || !isValid}
-              className={`rounded-lg bg-[#F2DCBB] w-1/2 h-12 text-center font-bold
-              text-[#555555] text-xl hover:border-b-2 border-[#555555] cursor-${
-                !isDirty || !isValid ? "not-allowed" : "pointer"
-              }`}
+              className="rounded-sm bg-[#404258] w-1/2 h-12 text-center font-bold
+              text-white text-xl border-b-2 border-[#FFDDD2] hover:-translate-y-2 duration-300"
             >
               Log-In
             </button>
